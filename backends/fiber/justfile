@@ -1,0 +1,64 @@
+set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
+
+[private]
+default:
+  @just --list --justfile {{justfile()}}
+
+# Build the application
+[unix]
+@build:
+  echo "Building..."
+  go build -o main cmd/api/main.go
+
+# Build the application
+[windows]
+@build:
+  echo "Building..."
+  go build -o main.exe cmd/api/main.go
+
+# Build the application for AIR
+[unix]
+@build-air:
+  echo "Building..."
+  go build -o tmp/main cmd/api/main.go
+
+# Build the application for AIR
+[windows]
+@build-air:
+  echo "Building..."
+  go build -o tmp/main.exe cmd/api/main.go
+
+# Run the application
+@run:
+  echo "Running..."
+  go run cmd/api/main.go
+
+# Create DB container
+@docker-run:
+  docker compose up
+
+# Shutdown DB container
+@docker-down:
+  docker compose down
+
+# Clean the binary
+[unix]
+@clean:
+  echo "Cleaning..."
+  rm -f main
+
+# Clean the binary
+[windows]
+@clean:
+  Write-Host "Cleaning..."
+  Remove-Item -Force main.exe
+
+# Live Reload
+[unix]
+@watch:
+  air -c .air.toml
+
+# Live Reload
+[windows]
+@watch:
+  air -c .air.windows.toml
