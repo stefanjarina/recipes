@@ -1,0 +1,13 @@
+services:
+  recipes_${name}:
+    image: 'stefanjarina/recipes-backend-${name}'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '${port}:${port}'
+
+networks:
+  default:
+    external:
+      name: recipes
