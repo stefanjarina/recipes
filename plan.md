@@ -25,6 +25,7 @@ The below is in no particular order per se, but the one on the top for each lang
 
 ### Out of scope
 
+- testing
 - any andvanced level of security (this is a hobby project)
 - UI will not be professional by any means
 

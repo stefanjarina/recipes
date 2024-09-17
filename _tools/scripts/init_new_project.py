@@ -82,3 +82,6 @@ template_file(PATHS["templates"].joinpath(*["git_specific", "README.md"]), fullp
 template_file(PATHS["templates"].joinpath(*["docker", "docker-compose.yml"]), fullpath, "docker-compose.yml", 
             additional_text=", please update exposed ports according to your specific needs", 
             name=args.name, port=args.port)
+
+# COPY justfile
+copy_file(PATHS["templates"].joinpath(*["other", "justfile"]), fullpath, "justfile")
