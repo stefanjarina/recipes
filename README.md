@@ -23,7 +23,7 @@ Written in several back-end frameworks and languages as well as in several moder
 - create database
 
 ```bash
-just db_up
+just db-up
 ```
 
 - scaffold new project
@@ -48,7 +48,9 @@ just remove backend go
 ```bash
 # below is automatically called by 'just new' task
 # this only works for backends
-just db_create go
+just db-create go
+just db-prepare go
+just db-seed go
 ```
 
 - drop database
@@ -56,16 +58,16 @@ just db_create go
 ```bash
 # below is automatically called by 'just remove' task
 # this only works for backends
-just db_drop go
+just db-drop go
 # Above is destructive action, confirmation will be needed, you can also pass --yes after just command
 ```
 
 - remove docker stuff
 
 ```bash
-just db_down # removes both container and volume
-just db_rm_c # removes only container
-just db_rm_v # removes only volume
+just db-down # removes both container and volume
+just db-rm-c # removes only container
+just db-rm-v # removes only volume
 # Above are all destructive actions, confirmation will be needed, you can also pass --yes after just command
 ```
 
@@ -74,14 +76,16 @@ just db_rm_v # removes only volume
 ```bash
 $ just
 Available recipes:
-    db_create NAME            # Prepare database
-    db_down                   # Remove postgres docker container and volume
-    db_drop NAME              # Drop database
-    db_rm_c                   # Remove postgres docker container
-    db_rm_v                   # Remove docker volume
-    db_start                  # Start postgres docker container
-    db_stop                   # Stop postgres docker container
-    db_up                     # Create postgres docker container
+    db-create NAME            # Create database and user
+    db-down                   # Remove postgres docker container and volume
+    db-drop NAME              # Drop database
+    db-prepare NAME           # Prepare database schema
+    db-rm-c                   # Remove postgres docker container
+    db-rm-v                   # Remove docker volume
+    db-seed NAME              # Seed database
+    db-start                  # Start postgres docker container
+    db-stop                   # Stop postgres docker container
+    db-up                     # Create postgres docker container
     new TYPE NAME PORT='3000' # Create new project
     remove TYPE NAME          # Remove project
 ```
