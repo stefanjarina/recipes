@@ -35,11 +35,11 @@ The below is in no particular order per se, but the one on the top for each lang
 
 | :heavy_check_mark: / :heavy_minus_sign: / :heavy_multiplication_x: |Name|Language|Notes|
 |-|-|-|-|
-| | [Svelte](https://svelte.dev/)| Javascript| |
 | | [Vue](https://vuejs.org/)|Javascript| |
 | | [React](https://react.dev/)|Javascript| |
 | | [Solid](https://www.solidjs.com/)|Javascript| |
 | | [Angular](https://angular.dev/)|Javascript| |
+| | [Svelte](https://svelte.dev/)| Javascript | Official docs advise to use SvelteKit even for SPA applications so we are going to do that, though we will have it twice, once as a pure SPA and once as a fullstack |
 | | [Preact](https://preactjs.com/) | Javascript | |
 | | [Alpine](https://alpinejs.dev/) | Javascript | |
 | | [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor)|C#| |
