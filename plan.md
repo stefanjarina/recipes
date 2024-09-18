@@ -18,15 +18,21 @@ The below is in no particular order per se, but the one on the top for each lang
 - switch between imperial and metric (store in metric, automatically calculate)
 - comments
 - stars
-- filtering
+- filtering (altough limited one)
 - export to csv, json, yaml, xml
 - import from csv, json, yaml, xml
 - export recipe as a picture and/or pdf???
+
+### Maybe in scope (if I like the framework a lot)
+
+- pagination
+- search
 
 ### Out of scope
 
 - testing
 - error handling (the perfect one at least)
+  - endpoints might not be super consistent in returned json when error
 - general polish
 - any andvanced level of security (this is a hobby project)
 - UI will not be professional by any means
