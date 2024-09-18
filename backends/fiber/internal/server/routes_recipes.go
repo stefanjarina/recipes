@@ -125,6 +125,66 @@ func (s *FiberServer) updateRecipeHandler(c *fiber.Ctx) error {
 	return c.JSON(recipe)
 }
 
+func (s *FiberServer) patchRecipeHandler(c *fiber.Ctx) error {
+	token := c.Locals("user").(*jtoken.Token)
+	claims := token.Claims.(jtoken.MapClaims)
+	email := claims["email"].(string)
+
+	id, err := uuid.Parse(c.Params("id"))
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	user, err := s.db.GetUserByEmail(email)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	recipeToUpdate := new(dtos.UpdateRecipeDto)
+	if err := c.BodyParser(recipeToUpdate); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	recipe, err := s.db.GetRecipeByID(id)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	if recipe.UserID != user.ID {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "You are not authorized to update this recipe",
+		})
+	}
+
+	updatedFields := map[string]interface{}{}
+	if recipeToUpdate.Title != "" {
+		updatedFields["title"] = recipeToUpdate.Title
+	}
+	if recipeToUpdate.Description != "" {
+		updatedFields["description"] = recipeToUpdate.Description
+	}
+	if recipeToUpdate.Visibility != "" {
+		updatedFields["visibility"] = recipeToUpdate.Visibility
+	}
+
+	err = s.db.PatchRecipe(recipe, updatedFields)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.JSON(recipe)
+}
+
 func (s *FiberServer) deleteRecipeHandler(c *fiber.Ctx) error {
 	token := c.Locals("user").(*jtoken.Token)
 	claims := token.Claims.(jtoken.MapClaims)

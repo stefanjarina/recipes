@@ -55,8 +55,89 @@ type Service interface {
 	// UpdateRecipe updates a recipe in the database.
 	UpdateRecipe(recipe *models.Recipe) error
 
+	// PatchRecipe updates a recipe in the database with only the provided fields.
+	PatchRecipe(existingRecipe *models.Recipe, updatedFields map[string]interface{}) error
+
 	// DeleteRecipe deletes a recipe by its ID from the database.
 	DeleteRecipe(id uuid.UUID) error
+
+	// GetIncredientsForRecipe retrieves all ingredients for a recipe from the database.
+	GetIngredientsForRecipe(recipeID uuid.UUID) ([]models.Ingredient, error)
+
+	// AddIngredientToRecipe adds an ingredient to a recipe in the database.
+	AddIngredientToRecipe(recipe *models.Recipe, ingredient *models.Ingredient) error
+
+	// GetIngredientByID retrieves an ingredient by its ID from the database.
+	GetIngredientByID(id uuid.UUID) (*models.Ingredient, error)
+
+	// DeleteIngredient deletes an ingredient in the database.
+	DeleteIngredient(ingredient *models.Ingredient) error
+
+	// GetRatingsForRecipe retrieves all ratings for a recipe from the database.
+	GetRatingsForRecipe(recipeID uuid.UUID) ([]models.Rating, error)
+
+	// AddRatingToRecipe adds a rating to a recipe in the database.
+	AddRatingToRecipe(rating *models.Rating) error
+
+	// GetRatingByID retrieves a rating by its ID from the database.
+	GetRatingByID(id uuid.UUID) (*models.Rating, error)
+
+	// DeleteRating deletes a rating in the database.
+	DeleteRating(ingredient *models.Rating) error
+
+	// GetStepsForRecipe retrieves all steps for a recipe from the database.
+	GetStepsForRecipe(recipeID uuid.UUID) ([]models.Step, error)
+
+	// GetStepByID retrieves a step by its ID from the database.
+	GetStepByID(id uuid.UUID) (*models.Step, error)
+
+	// AddStepToRecipe adds a step to a recipe in the database.
+	AddStepToRecipe(recipe *models.Recipe, step *models.Step) error
+
+	// DeleteStep deletes a step in the database.
+	DeleteStep(step *models.Step) error
+
+	// GetIngredientsForStep retrieves all ingredients for a step from the database.
+	GetIngredientsForStep(stepID uuid.UUID) ([]models.StepIngredient, error)
+
+	// GetStepIngredientByID retrieves a step ingredient by its ID from the database.
+	GetStepIngredientByID(id uuid.UUID) (*models.StepIngredient, error)
+
+	// AddIngredientToStep adds a step ingredient to a step in the database.
+	AddIngredientToStep(step *models.Step, ingredient *models.StepIngredient) error
+
+	// DeleteStepIngredient deletes a step ingredient in the database.
+	DeleteStepIngredient(ingredient *models.StepIngredient) error
+
+	// GetCommentsForRecipe retrieves all comments for a recipe from the database.
+	GetCommentsForRecipe(recipeID uuid.UUID) ([]models.Comment, error)
+
+	// AddCommentToRecipe adds a comment to a recipe in the database.
+	AddCommentToRecipe(comment *models.Comment) error
+
+	// GetCommentByID retrieves a comment by its ID from the database.
+	GetCommentByID(id uuid.UUID) (*models.Comment, error)
+
+	// DeleteComment deletes a comment in the database.
+	DeleteComment(ingredient *models.Comment) error
+
+	// GetMeasurementTypes retrieves all measurement types from the database.
+	GetMeasurementTypes() ([]models.MeasurementType, error)
+
+	// CreateMeasurementType creates a new measurement type in the database.
+	CreateMeasurementType(measurementType *models.MeasurementType) error
+
+	// DeleteMeasurementType deletes a measurement type by its ID from the database.
+	DeleteMeasurementType(id uuid.UUID) error
+
+	// GetMeasurements retrieves all measurements from the database.
+	GetMeasurements() ([]models.Measurement, error)
+
+	// CreateMeasurement creates a new measurement in the database.
+	CreateMeasurement(measurement *models.Measurement) error
+
+	// DeleteMeasurement deletes a measurement by its ID from the database.
+	DeleteMeasurement(id uuid.UUID) error
 }
 
 type service struct {

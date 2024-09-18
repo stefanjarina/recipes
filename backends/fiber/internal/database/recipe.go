@@ -40,6 +40,15 @@ func (s *service) UpdateRecipe(recipe *models.Recipe) error {
 	return nil
 }
 
+func (s *service) PatchRecipe(existingRecipe *models.Recipe, updatedFields map[string]interface{}) error {
+	// Perform the patch update with only the provided fields
+	result := s.db.Model(&existingRecipe).Updates(updatedFields)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
 func (s *service) DeleteRecipe(id uuid.UUID) error {
 	result := s.db.Where("recipe_id = ?", id).Delete(&models.Recipe{})
 	if result.Error != nil {
