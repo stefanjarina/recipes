@@ -5,7 +5,6 @@ import (
 	"fiber/internal/dtos"
 
 	"github.com/gofiber/fiber/v2"
-	jtoken "github.com/golang-jwt/jwt/v4"
 )
 
 func (s *FiberServer) LoginHandler(c *fiber.Ctx) error {
@@ -43,14 +42,4 @@ func (s *FiberServer) LoginHandler(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(toReturn)
-}
-
-func (s *FiberServer) ProtectedHandler(c *fiber.Ctx) error {
-	user := c.Locals("user").(*jtoken.Token)
-	claims := user.Claims.(jtoken.MapClaims)
-	email := claims["email"].(string)
-	return c.JSON(fiber.Map{
-		"message": "Protected",
-		"email":   email,
-	})
 }

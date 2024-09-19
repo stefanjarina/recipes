@@ -15,7 +15,6 @@ func (s *FiberServer) RegisterFiberRoutes() {
 	s.App.Delete("/api/users/:id", s.jwtMiddleware, s.deleteUser)
 
 	s.App.Post("/api/login", s.LoginHandler)
-	s.App.Get("/api/protected", s.jwtMiddleware, s.ProtectedHandler)
 
 	s.App.Get("/api/recipes", s.getRecipesHandler)
 	s.App.Get("/api/recipes/:id", s.getRecipeHandler)

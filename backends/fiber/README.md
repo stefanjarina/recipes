@@ -14,8 +14,8 @@ It is adviced to use just scripts to create and setup database, but you can do i
 
 ```bash
 # from root of this repository run
-just db_up
-just db_create
+just db-up
+just db-create
 ```
 
 #### Manually
