@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Recipes.API.auth;
+using Recipes.API.models;
 using Recipes.API.entities;
 
 namespace Recipes.API.services;

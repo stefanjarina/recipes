@@ -1,4 +1,4 @@
-﻿namespace Recipes.API.auth;
+﻿namespace Recipes.API.models;
 
 public class JwtSettings
 {

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Recipes.API.db;
 using Recipes.API.dtos;
+using Recipes.API.helpers;
 using Recipes.API.services;
 
 namespace Recipes.API.handlers;
@@ -13,10 +14,10 @@ public static class AuthHandlers
     {
         var user = await db.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
         if (user == null)
-            return Results.NotFound();
+            return ApiResponse.NotFound();
 
-        if (user.PasswordHash != loginDto.Password)
-            return Results.Unauthorized();
+        if (!BCrypt.Net.BCrypt.EnhancedVerify(loginDto.Password, user.PasswordHash))
+            return ApiResponse.Unauthorized();
 
         var token = tokenService.GenerateToken(user);
 
@@ -27,6 +28,6 @@ public static class AuthHandlers
             token,
         };
         
-        return Results.Json(response);
+        return ApiResponse.Ok(response);
     }
 }
