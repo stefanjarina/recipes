@@ -1,0 +1,13 @@
+services:
+  recipes_aspnet:
+    image: 'stefanjarina/recipes-backend-aspnet'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+
+networks:
+  default:
+    external:
+      name: recipes

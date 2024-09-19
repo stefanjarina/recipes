@@ -1,0 +1,39 @@
+set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
+
+[private]
+default:
+  @just --list --justfile {{justfile()}}
+
+# Build the application
+@build:
+  echo "Building..."
+  # your command here
+
+# Run the application
+@run:
+  echo "Running..."
+  # your command here
+
+# Create DB container
+@docker-run:
+  docker compose up
+
+# Shutdown DB container
+@docker-down:
+  docker compose down
+
+# Clean the binary
+[unix]
+@clean:
+  echo "Cleaning..."
+  # your command here
+
+# Clean the binary
+[windows]
+@clean:
+  Write-Host "Cleaning..."
+  # your command here
+
+# Live Reload
+@watch:
+  # your command here
